@@ -20,7 +20,7 @@ describe('teste a service', function () {
     sinon.stub(connection, 'execute').resolves([product]);
     const result = await productServices.findProductById(1);
 
-    expect(result.id).to.be.equal(1);
+    expect(result.id).to.equal(1);
     expect(result.name).to.equal('Martelo de Thor');
   });
 });
