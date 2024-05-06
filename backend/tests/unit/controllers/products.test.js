@@ -4,7 +4,7 @@ const chaiHttp = require('chai-http');
 const app = require('../../../src/app');
 const connection = require('../../../src/connection');
 const { products } = require('../mocks/product.mocks');
-const productServices = require('../../../src/services/products.services')
+const productServices = require('../../../src/services/products.services');
 
 chai.use(chaiHttp);
 const { expect } = chai;
