@@ -23,6 +23,21 @@ describe('testa a model', function () {
     expect(result.quantity).to.equal(2);
     expect(result.date).to.equal('2021-09-09T04:54:29.000Z');
   });
+  it('deve retornar sales com a data correta', async function () {
+    const productDetail = [
+      { productId: 1, quantity: 2 },
+      { productId: 2, quantity: 4 },
+    ];
+    const itemSold = [
+      { productId: 1, quantity: 2 },
+      { productId: 2, quantity: 4 },
+    ];
+    const insertId = 1;
+
+    sinon.stub(connection, 'execute').resolves([{ insertId }]);
+    const result = await salesModel.createSale(productDetail);
+    expect(result).to.be.deep.equal({ id: insertId, item: itemSold });
+  });
   afterEach(function () {
     sinon.restore();
   });

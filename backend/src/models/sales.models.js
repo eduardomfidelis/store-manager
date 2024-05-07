@@ -21,4 +21,31 @@ const findSaleByID = async (id) => {
   );
   return sales;
 };
-module.exports = { findAllSales, findSaleByID };
+
+const insertSaledate = async () => {
+  const [{ insertId }] = await connection.execute(
+    'insert into sales (date) values (?)',
+    [new Date()],
+  );
+  return { insertId };
+};
+
+const insertSalesProducts = async (saleId, salesData) => {
+  const promises = salesData.map(async (item) => {
+    const { productId, quantity } = item;
+    await connection
+      .execute(
+        'insert into sales_products (sale_id, product_id, quantity) values (?,?,?)',
+        [saleId, productId, quantity],
+      );
+    return { productId, quantity };
+  });
+  return Promise.all(promises);
+};
+
+const createSale = async (salesData) => {
+  const { insertId } = await insertSaledate();
+  const salesProducts = await insertSalesProducts(insertId, salesData);
+  return { id: insertId, item: salesProducts };
+};
+module.exports = { findAllSales, findSaleByID, createSale };
