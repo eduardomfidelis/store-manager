@@ -17,8 +17,15 @@ const findProductById = async (req, res) => {
 };
 
 const createProduct = async (request, response) => {
-  console.log(request.body);
   const { name } = request.body;
+  console.log(name);
+  // req 4 
+  if (!name) return response.status(400).json({ message: '"name" is required' });
+  if (name.length < 5) {
+    return response.status(422).json({
+      message: '"name" length must be at least 5 characters long',
+    });
+  }
   const created = await productServices.createProduct(name);
   response.status(201).json({ id: created, name });
 };

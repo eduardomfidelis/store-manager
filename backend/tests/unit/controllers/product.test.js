@@ -1,11 +1,12 @@
 const chai = require('chai');
 const sinonchai = require('sinon-chai');
+const chaiHttp = require('chai-http');
 const sinon = require('sinon');
 const app = require('../../../src/app');
 const productServices = require('../../../src/services/products.services');
 
 const { expect } = chai;
-chai.use(sinonchai);
+chai.use(chaiHttp);
 
 describe('testa a controller', function () {
   afterEach(function () {
@@ -34,5 +35,22 @@ describe('testa a controller', function () {
 
     expect(response).to.have.status(201);
     expect(response.body).to.deep.equal(expectedResponse);
+  });
+
+  it('deve retornar 400 se o nome não for passado', async function () {
+    const request = { body: { } };
+    const response = await chai.request(app).post('/products').send(request.body);
+
+    expect(response).to.have.status(400);
+    expect(response.body.message).to.equal('"name" is required');
+  });
+
+  it('deve retornar 422 se 0 nome for menor que 5 caracteres', async function () {
+    const request = { body: { name: 'bala' } };
+    const response = await chai.request(app).post('/products').send(request.body);
+
+
+    expect(response).to.have.status(422);
+    expect(response.body.message).to.equal('"name" length must be at least 5 characters long');
   });
 });
