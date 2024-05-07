@@ -25,8 +25,8 @@ describe('testa a model', function () {
   });
   it('deve retornar sales com a data correta', async function () {
     const productDetail = [
-      { productId: 1, quantity: 1 },
-      { productId: 2, quantity: 5 },
+      { productId: 1, quantity: 2 },
+      { productId: 2, quantity: 4 },
     ];
     const itemSold = [
       { productId: 1, quantity: 2 },
