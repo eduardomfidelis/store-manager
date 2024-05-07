@@ -25,8 +25,9 @@ describe('testa camada model', function () {
     const nameProduct = 'martelo';
     const productId = 6;
 
-    sinon.stub(connection, 'execute').resolves([{ productId }]);
+    sinon.stub(productModel, 'createProduct').resolves(productId);
     const result = await productModel.createProduct(nameProduct);
+    console.log('result retorno');
 
     expect(result).to.equal(productId);
   });
