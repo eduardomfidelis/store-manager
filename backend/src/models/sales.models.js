@@ -46,6 +46,6 @@ const insertSalesProducts = async (saleId, salesData) => {
 const createSale = async (salesData) => {
   const { insertId } = await insertSaledate();
   const salesProducts = await insertSalesProducts(insertId, salesData);
-  return { id: insertId, item: salesProducts };
+  return { id: insertId, itemsSold: salesProducts };
 };
 module.exports = { findAllSales, findSaleByID, createSale };
