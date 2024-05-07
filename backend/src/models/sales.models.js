@@ -5,7 +5,7 @@ const findAllSales = async () => {
     `SELECT sp.sale_id AS saleId, s.date, sp.product_id AS productId, sp.quantity
     from sales_products AS sp
     join sales AS s
-    on sp.saleId = s.id`,
+    on sp.sale_id = s.id`,
   );
   return sales;
 };
@@ -21,5 +21,4 @@ const findSaleByID = async (id) => {
   );
   return sales;
 };
-
 module.exports = { findAllSales, findSaleByID };
