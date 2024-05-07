@@ -5,5 +5,6 @@ const route = Router();
 
 route.get('/', productController.findAllproducts);
 route.get('/:id', productController.findProductById);
+route.post('/', productController.createProduct);
 
 module.exports = route;
