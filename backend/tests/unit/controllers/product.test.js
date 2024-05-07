@@ -1,5 +1,5 @@
 const chai = require('chai');
-const sinonchai = require('sinon-chai');
+// const sinonchai = require('sinon-chai');
 const chaiHttp = require('chai-http');
 const sinon = require('sinon');
 const app = require('../../../src/app');
@@ -48,7 +48,6 @@ describe('testa a controller', function () {
   it('deve retornar 422 se 0 nome for menor que 5 caracteres', async function () {
     const request = { body: { name: 'bala' } };
     const response = await chai.request(app).post('/products').send(request.body);
-
 
     expect(response).to.have.status(422);
     expect(response.body.message).to.equal('"name" length must be at least 5 characters long');
