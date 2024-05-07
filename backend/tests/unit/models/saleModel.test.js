@@ -36,7 +36,7 @@ describe('testa a model', function () {
 
     sinon.stub(connection, 'execute').resolves([{ insertId }]);
     const result = await salesModel.createSale(productDetail);
-    expect(result).to.be.deep.equal({ id: insertId, item: itemSold });
+    expect(result).to.be.deep.equal({ id: insertId, itemsSold: itemSold });
   });
   afterEach(function () {
     sinon.restore();
