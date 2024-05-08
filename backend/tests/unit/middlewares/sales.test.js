@@ -1,4 +1,4 @@
-/* const chai = require('chai');
+const chai = require('chai');
 const sinon = require('sinon');
 const sinonchai = require('sinon-chai');
 const productService = require('../../../src/services/products.services');
@@ -52,19 +52,4 @@ describe('teste para middleware', function () {
       message: '"quantity" must be greater than or equal to 1',
     });
   });
-
-  it('testa productID', async function () {
-    const request = { body: [{ productId: 100, quantity: 1 }] };
-    const response = {
-      status: sinon.stub().returnsThis(),
-      json: sinon.spy(),
-    };
-    sinon.stub(productService, 'findProductById').resolves(null);
-    await productValidation(request, response);
-    expect(response.status).to.have.been.calledWith(404);
-    expect(response.json).to.have.been.calledWith({
-      message: '"product" not found',
-    });
-  });
 });
-*/
