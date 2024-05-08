@@ -19,8 +19,13 @@ const createProduct = async (name) => {
   return result.insertId;
 };
 
+const deleteProducts = async (id) => {
+  await connection.execute('delete from products where id = ?', [id]);
+  return id;
+};
 module.exports = {
   findAllproducts,
   findProductById,
   createProduct,
+  deleteProducts,
 };

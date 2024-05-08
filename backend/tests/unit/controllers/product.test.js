@@ -52,4 +52,25 @@ describe('testa a controller', function () {
     expect(response).to.have.status(422);
     expect(response.body.message).to.equal('"name" length must be at least 5 characters long');
   });
+
+  it('apaga produto', async function () {
+    const deletingProduct = 1;
+
+    productServices.getProductById = async () => ({ id: deletingProduct });
+
+    const res = await chai.request(app).delete(`/products/${deletingProduct}`);
+
+    expect(res).to.have.status(404);
+  });
+  it('se o id nao existe', async function () {
+    const noneProduct = 100;
+
+    sinon.stub(productServices, 'findProductById').resolves(null);
+
+    const res = await chai
+      .request(app).delete(`/products/${noneProduct}`);
+
+    expect(res).to.have.status(404);
+    expect(res.body.message).to.equal(undefined);
+  });
 });
